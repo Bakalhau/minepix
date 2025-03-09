@@ -1,0 +1,42 @@
+# Configuração da API LivePix
+livepix:
+  client_id: ""
+  client_secret: ""
+
+# Configuração do Webhook
+webhook:
+  port: 5000 # Porta do webhook
+  key: "" # Chave de segurança para a URL do webhook
+
+# Configuração do RCON do Minecraft
+minecraft:
+  host: "localhost"
+  port: 25575 # Esta NÃO é a porta do servidor minecraft, é a porta RCON
+  password: "" # Senha do RCON
+  player: "" # Nickname do jogador que será afetado pelos comandos
+  
+# Configuração dos Comandos
+# Formato: valor_em_centavos: "comando_minecraft"
+# Use {player} para inserir o nome do jogador da configuração
+# Use {donor} para inserir o nome do doador
+# Use {amount} para inserir o valor da doação
+# Use {message} para inserir a mensagem da doação
+commands:
+  # R$1,00 = cegueira - 10 segundos
+  100: >-
+    effect give {player} blindness 10
+  # R$5,00 = raio
+  500: >-
+    execute at {player} run summon lightning_bolt ~ ~ ~
+  # R$20,00 = teleportar para o céu
+  2000: >-
+    execute at {player} run tp ~ ~20 ~
+  # R$30,00 = creeper com nome do doador
+  3000: >-
+    execute at {player} run summon creeper ~ ~ ~ {CustomName:'{"text":"Presente de {donor}","color":"red"}',CustomNameVisible:1,powered:1}
+  # R$50,00 = matar o jogador
+  5000: >-
+    kill {player}
+  # R$100,00 = limpar o inventário
+  10000: >-
+    clear {player}
